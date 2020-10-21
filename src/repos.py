@@ -61,6 +61,10 @@ BROWSERS = [
     'WebKit',
 ]
 
+SHELLS = [
+    'tmux',
+]
+
 DEFAULT_SEARCH_PATH = '~/delete/this/example'
 DEFAULT_SETTINGS = {
     'search_dirs': [{
@@ -251,6 +255,16 @@ def do_open(opts):
                 subprocess.call(['open', url])
             else:
                 subprocess.call(['open', '-a', app, url])
+        if app in SHELLS:
+            log.info('opening %s with %s ...', opts.path, app)
+            subprocess.call([
+                'bash', '-c', 'path_to_dir=' + opts.path + '&& \
+                active_window=$(/usr/local/bin/tmux list-windows -t 0 | grep active | grep -o "^\d\+") && \
+                window_name=$(echo ${path_to_dir} | grep -o "[^/]\+$") && \
+                if /usr/local/bin/tmux list-windows -t 0 -F "#{window_name}" | grep "${window_name}" 1>/dev/null 2>&1; then /usr/local/bin/tmux select-window -t 0:${window_name}; exit; fi && \
+                /usr/local/bin/tmux new-window -t 0:${active_window} -a -n ${window_name} && \
+                /usr/local/bin/tmux send-keys -t 0:${window_name} "cd ${path_to_dir}; tla \"$2\"" Enter'
+            ])
         else:
             log.info('opening %s with %s ...', opts.path, app)
             subprocess.call(['open', '-a', app, opts.path])
