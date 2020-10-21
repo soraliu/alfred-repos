@@ -263,7 +263,7 @@ def do_open(opts):
                 window_name=$(echo ${path_to_dir} | grep -o "[^/]\+$") && \
                 if /usr/local/bin/tmux list-windows -t 0 -F "#{window_name}" | grep "${window_name}" 1>/dev/null 2>&1; then /usr/local/bin/tmux select-window -t 0:${window_name}; exit; fi && \
                 /usr/local/bin/tmux new-window -t 0:${active_window} -a -n ${window_name} && \
-                /usr/local/bin/tmux send-keys -t 0:${window_name} "cd ${path_to_dir}; tla \"$2\"" Enter'
+                /usr/local/bin/tmux send-keys -t 0:${window_name} "cd ${path_to_dir}; tla" Enter'
             ])
         else:
             log.info('opening %s with %s ...', opts.path, app)
