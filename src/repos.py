@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # encoding: utf-8
 #
-# Copyright (c) 2013 deanishe@deanishe.net.
+# Copyright (c) 2021 soraliu.dev@gmail.com
 # MIT Licence. See http://opensource.org/licenses/MIT
 #
 # Created on 2013-11-04
@@ -40,10 +40,10 @@ from workflow.update import Version
 DEFAULT_UPDATE_INTERVAL = 180  # minutes
 
 # GitHub repo for self-updating
-UPDATE_SETTINGS = {'github_slug': 'deanishe/alfred-repos'}
+UPDATE_SETTINGS = {'github_slug': 'soraliu/alfred-repos'}
 
 # GitHub Issues
-HELP_URL = 'https://github.com/deanishe/alfred-repos/issues'
+HELP_URL = 'https://github.com/soraliu/alfred-repos/issues'
 
 # Icon shown if a newer version is available
 ICON_UPDATE = 'update-available.png'
